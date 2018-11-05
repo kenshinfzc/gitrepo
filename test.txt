@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-git is AB master
-=======
-git is AB dev
->>>>>>> dev
+git is AB dev1

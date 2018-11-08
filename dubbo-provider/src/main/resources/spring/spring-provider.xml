@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://code.alibabatech.com/schema/dubbo        
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-lazy-init="true">
+	 
+	<dubbo:application name="provider"/>
+	
+	<!-- <dubbo:registry address="multicast://224.5.6.7:1234"></dubbo:registry> -->
+	<!-- <dubbo:registry address="134.64.93.181:2181" protocol="zookeeper"></dubbo:registry> -->
+		<dubbo:registry address="192.168.0.103:2181" protocol="zookeeper"></dubbo:registry>
+	
+	
+	<dubbo:protocol name="dubbo" port="20880"></dubbo:protocol>
+	
+	<dubbo:service interface="czf.api.Provider" ref="p1"></dubbo:service>
+	
+	<bean id="provi" class="czf.provider.ProviderIml"></bean>
+	<bean id="p1" class="czf.provider.ProviderIml1"></bean>
+	
+	
+</beans>

@@ -16,8 +16,8 @@
 	<!-- <dubbo:registry address="multicast://224.5.6.7:1234"></dubbo:registry> --><!-- 
 	<dubbo:registry address="134.64.93.181:2181" protocol="zookeeper"></dubbo:registry> -->
 	
-	
-	<dubbo:registry address="192.168.0.103:2181" protocol="zookeeper"></dubbo:registry>
+	<dubbo:registry address="134.64.93.142:2181" protocol="zookeeper"></dubbo:registry>
+	<!-- <dubbo:registry address="192.168.0.103:2181" protocol="zookeeper"></dubbo:registry> -->
 	<dubbo:protocol name="dubbo" port="20880"></dubbo:protocol>
 	
 	<dubbo:reference interface="czf.api.Provider" id="p1"></dubbo:reference>	

@@ -1,14 +1,10 @@
 package com.czf;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 import com.czf.manager.CompletionManager;
-import com.czf.model.Orders;
 import com.czf.util.SpringContextUtil;
 
 @WebServlet(urlPatterns="/init",loadOnStartup=1)

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"  
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd"> 
+<sqlMap namespace="userSql">
+<statement id="createTable">
+	<![CDATA[  
+        create table cup(  
+          id int ,   
+          name varchar(100))  
+    ]]> 
+</statement>
+
+<statement id="dropTable">
+<![CDATA[  
+        drop table cup 
+    ]]> 
+</statement>
+
+<insert id="insertCup" parameterClass="com.fzc.springtest.orm.ibatis.Cup">
+ <![CDATA[  
+        insert into cup(id,name) values(#id#,#name#)
+    ]]> 
+</insert>
+<insert id="insertCup1" parameterClass="com.fzc.springtest.orm.ibatis.Cup">
+	
+    <selectKey keyProperty="id" resultClass="int">
+    	select LAST_INSERT_ID() as id
+    </selectKey>
+        insert into cup
+    <dynamic>
+    	<isNotEmpty open="(" close="," prepend="" property="ppp">ppp</isNotEmpty>
+    	<isNotEmpty close=")"  prepend="" property="name">name</isNotEmpty>
+    </dynamic>
+     values 
+    <dynamic>
+    	<isNotEmpty open="(" close=","  prepend="" property="ppp">$ppp$</isNotEmpty>
+    	<isNotEmpty close=")"  prepend="" property="name">#name#</isNotEmpty>
+    </dynamic>
+</insert>
+<select id="selectCup" resultClass="java.util.HashMap">
+<![CDATA[  
+        select * from cup
+    ]]>
+</select>
+<update id="updateCup" parameterClass="java.util.Map">
+<![CDATA[
+	update cup set name = #name# where id= #id#
+]]>
+</update>
+<delete id="deleteCup" parameterClass="java.util.Map">
+<![CDATA[
+	delete from cup where id=#id#
+]]>
+</delete>
+<delete id="deleteCupAll">
+<![CDATA[
+	delete  from cup 
+]]>
+</delete>
+
+<insert id="insertCupBatch" parameterClass="java.util.List">
+ <![CDATA[  
+        insert into cup(id,name) values
+     	]]>
+     <iterate conjunction=",">
+    <![CDATA[
+        (#cup[].id#,#cup[].name#)
+	]]> 
+     </iterate>
+</insert>
+<update id="updateCupBatch" parameterClass="java.util.List">
+<![CDATA[
+	update cup set name= 'cupp'  where id in
+]]>
+<iterate conjunction=","  open="(" close=")" >
+	<![CDATA[
+		 #cup[].id#
+	]]>
+</iterate>
+</update>
+
+<update id="updateCupBatch1" parameterClass="java.util.List">
+<iterate  close=";">
+	<![CDATA[
+		update cup set name= #cup[].name#  where id = #cup[].id#
+	]]>
+</iterate>
+</update>
+</sqlMap>

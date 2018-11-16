@@ -1,0 +1,20 @@
+写写锁互斥
+await writeLock will wait time is 1539140308431
+  await writeLock is back time is 1539140309432
+await writeLock will wait time is 1539140309436
+  await writeLock is back time is 1539140310436
+读读锁共享
+await readLock will wait time is 1539140383449
+await readLock will wait time is 1539140383449
+  await readLock is back time is 1539140384449
+  await readLock is back time is 1539140384449
+读写锁互斥
+ await readLock will wait time is 1539140461019
+   await readLock is back time is 1539140462019
+await writeLock will wait time is 1539140462019
+  await writeLock is back time is 1539140463019
+写读锁互斥
+await writeLock will wait time is 1539140605516
+  await writeLock is back time is 1539140606517
+ await readLock will wait time is 1539140606517
+   await readLock is back time is 1539140607517

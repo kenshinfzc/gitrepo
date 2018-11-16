@@ -1,0 +1,28 @@
+1、线程创建 实例数据共享  Thread  Runnable
+2、start()  run()
+3、join()  daemon()
+4、yield()  sleep() 
+5、wait()  notify()  notifyAll ()    
+特别备注：wait方法应该用在while循环中，才能保证线程正常结束，且不存在数据问题
+特别备注：condition.await方法也应该用在while循环中，才能保证线程正常结束，且不存在数据问题
+
+	interrupt()    isInterrupted()     interrupted() 
+	interrupted() 和 isInterrupted()都能够用于检测对象的“中断标记”。
+	区别是，interrupted()除了返回中断标记之外，它还会清除中断标记(即将中断标记设为false)；而isInterrupted()仅仅返回中断标记。
+6、线程组   ThreadGroup
+7、管道流  PipedReader  PipedWriter  connect
+8、自定义异常处理器接口  UncaughtExceptionHandler
+9、带返回值的线程    Callable   Future   FutureTask 
+10、 synchronized  同步块    同步方法      对象锁
+11、lock  ReentrantLock   Condition   await()  signal()   signalAll()
+12、读写锁     ReentrantReadWriteLock  写互斥    读 共享
+13、线程池     Executor    Executors工具类 创建线程池
+ExecutorService任务执行   
+	submit 返回Future   execute 无返回       
+	shutdown()停止未执行任务    shutdownNow()停止所有任务       awaitTermination()判断固定时间后线程池是否已终止
+	isShutdowm()   isTerminated()   
+ThreadPoolExecutor   
+	FixedThreadPool 固定数量任务执行        SingleThreadPool 单一任务执行       CachedThreadPool
+ScheduledThreadPoolExecutor   
+14、volatile 可以实现内存可见性，强制不进行指令重排序，但是不能实现操作的原子性
+15、AtomicInteger   CAS算法

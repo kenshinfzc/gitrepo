@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="GBK" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		">
+	
+	<bean id="chinese" class="com.fzc.springtest.test1.Chinese">
+		<property name="axe" ref="stoneAxe"></property>
+		<property name="ss" value="${test.sss}"></property>
+	</bean>
+	<!-- <bean id="stoneAxe" class="com.fzc.springtest.test1.StoneAxe"></bean> -->
+	<bean id="stoneAxe" class="com.fzc.springtest.test1.IronAxe"></bean>
+	<!-- <bean id="china" class="com.fzc.springtest.test1.China" autowire="byName"></bean> -->
+
+	<!-- 资源文件配置 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:property/resources.properties"></property>
+	</bean>
+
+	<bean id="jdbcTemplateClient" class="com.fzc.springtest.jdbc.JdbcTemplateClient">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<!-- spring 数据源配置 property name固定 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<property name="driverClassName" value="${jdbc.classname}"></property>
+	</bean>
+
+	<!-- c3p0，配置数据源 -->
+	<!-- <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
+		<property name="driverClass" value="${jdbc.driver}"></property> <property 
+		name="jdbcUrl" value="${jdbc.url}"></property> <property name="user" value="${jdbc.name}"></property> 
+		<property name="password" value="${jdbc.password}"></property> </bean> -->
+
+	<bean id="sessionFactotry"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="annotatedClasses">
+			<list>
+				<value>
+					com.fzc.springtest.orm.hibernate.Book
+				</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.HSQLDialect
+				</prop>
+			</props>
+		</property>
+	</bean>	
+
+	<!-- ibatis  begin -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:ibatis/sql-map-config.xml"></property>
+	</bean>
+	
+	<bean id="sqlMapClientTemplateUtil" class="com.fzc.springtest.orm.ibatis.SqlMapClientTemplateUtil">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+	<!-- ibatis  end -->
+	
+	<!-- aop begin -->
+	<bean id="HelloService" class="com.fzc.springtest.aop.HelloService"></bean>
+	<bean id="HelloService2" class="com.fzc.springtest.aop.HelloService2"></bean>
+	<bean id="HelloServiceAspect" class="com.fzc.springtest.aop.HelloServiceAspect"></bean>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.fzc.springtest.aop..*.*(..))" id="pointcut1"/>
+		<aop:pointcut expression="execution(* com.fzc.springtest.aop..*.sayHello(..))" id="pointcut2"/>
+		<aop:aspect ref="HelloServiceAspect">
+			<aop:before pointcut-ref="pointcut1" method="beforeAdvice"/>
+			<aop:after pointcut="execution(* com.fzc.springtest.aop..*.sayHello(..)) and args(param,param2)" 
+			method="afterAdvice(java.lang.String,java.lang.String)" 
+			arg-names="param,param2"/>
+
+			<aop:after-returning pointcut-ref="pointcut2" method="afterReturningAdvice"
+			arg-names="param1" returning="param1"/>
+			<aop:after-throwing pointcut="execution(* com.fzc.springtest.aop..*.sayHelloException(..))" 
+			method="afterThrowingAdvice" arg-names="ex1" throwing="ex1"/>
+		</aop:aspect>
+	</aop:config>
+	<!-- aop end -->
+</beans>

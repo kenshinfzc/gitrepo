@@ -13,6 +13,7 @@
 		<spring.version>3.2.8.RELEASE</spring.version>
 		<jdk.version>1.7</jdk.version>
 		<hibernate.version>3.5.4-Final</hibernate.version>
+		<struts.version>2.3.35</struts.version>
 	</properties>
 
 	<dependencies>
@@ -89,23 +90,24 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
-			<version>2.3.16</version>
+			<version>${struts.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
-			<version>2.3.16</version>
+			<version>${struts.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-convention-plugin</artifactId>
-			<version>2.3.16</version>
+			<version>${struts.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
 			<version>3.12.1.GA</version>
 		</dependency>
+		<!--struts -->
 		<!-- <dependency> <groupId>com.sun</groupId> <artifactId>tools</artifactId> 
 			<version>1.5.0</version> </dependency> -->
 		<dependency>
@@ -191,7 +193,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.16</version>
+			<version>1.2.31</version>
 		</dependency>
 		<!-- json -->
 
